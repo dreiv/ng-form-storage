@@ -1,0 +1,10 @@
+<p>Persisted with indexDB</p>
+<form [formGroup]="group" name="large-form" (ngSubmit)="submit()">
+  <input type="text" placeholder="Name" formControlName="name">
+  <input type="email" placeholder="Email" formControlName="email">
+  <input type="phone" placeholder="Phone" formControlName="phone">
+  <input type="text" placeholder="Address" formControlName="address">
+  <button type="submit">Submit</button>
+</form>
+
+{{ group.value | json }}

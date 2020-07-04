@@ -4,11 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { FormStorageDirective } from './form-storage.directive';
+import { LargeFormComponent } from './large-form/large-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormStorageDirective
+    FormStorageDirective,
+    LargeFormComponent
   ],
   imports: [
     BrowserModule,
