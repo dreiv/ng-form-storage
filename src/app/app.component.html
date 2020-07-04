@@ -1,1 +1,7 @@
-<h1>hello world!</h1>
+<form [formGroup]="group" name="contact" (ngSubmit)="submit()">
+  <input type="text" placeholder="Name" formControlName="name">
+  <input type="email" placeholder="Email" formControlName="email">
+  <button type="submit">Submit</button>
+</form>
+
+{{ group.value | json }}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  group = new FormGroup({
+    name: new FormControl(),
+    email: new FormControl()
+  });
+
+  constructor() {
+  }
+
+  submit(): void {
+    this.group.reset();
+  }
 }
