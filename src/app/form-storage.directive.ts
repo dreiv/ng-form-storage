@@ -10,6 +10,7 @@ import { debounceTime, filter, take, takeUntil } from 'rxjs/operators';
 })
 export class FormStorageDirective implements OnInit, OnDestroy {
   @Input() name!: string;
+  @Input() saveStrategy: 'change' | 'unload' = 'unload';
 
   private destroy = new Subject();
   private destroy$ = this.destroy.asObservable();
@@ -21,7 +22,7 @@ export class FormStorageDirective implements OnInit, OnDestroy {
 
   @HostListener('submit')
   onSubmit(): void {
-    sessionStorage.removeItem(this.key);
+    this.storage.removeItem(this.key);
   }
 
   private get key(): string {
@@ -33,12 +34,17 @@ export class FormStorageDirective implements OnInit, OnDestroy {
   }
 
   async ngOnInit(): Promise<void> {
-    const storageValue = await this.storage.getItem(this.key);
+    this.saveStrategy === 'unload'
+      ? this.unloadStrategy()
+      : this.changeStrategy();
 
+    const storageValue = await this.storage.getItem(this.key) as string;
     if (storageValue) {
-      this.group?.patchValue(storageValue);
+      this.group?.patchValue(JSON.parse(storageValue));
     }
+  }
 
+  private unloadStrategy(): void {
     merge(
       fromEvent(window, 'beforeunload'),
       this.destroy$
@@ -46,9 +52,16 @@ export class FormStorageDirective implements OnInit, OnDestroy {
       takeUntil(this.destroy$),
       filter(() => this.group?.dirty ?? false),
       take(1)
-    ).subscribe(() => {
-      this.storage.setItem(this.key, this.group?.value ?? false);
-    });
+    ).subscribe(() => this.saveValue(this.group?.value));
+  }
+
+  private changeStrategy(): void {
+    this.group?.valueChanges.pipe(debounceTime(400), takeUntil(this.destroy$))
+      .subscribe(value => this.saveValue(value));
+  }
+
+  private saveValue(value: any): void {
+    this.storage.setItem(this.key, JSON.stringify(value));
   }
 
   ngOnDestroy(): void {

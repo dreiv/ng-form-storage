@@ -5,12 +5,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { FormStorageDirective } from './form-storage.directive';
 import { LargeFormComponent } from './large-form/large-form.component';
+import { DelayFormComponent } from './delay-form/delay-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormStorageDirective,
-    LargeFormComponent
+    LargeFormComponent,
+    DelayFormComponent
   ],
   imports: [
     BrowserModule,

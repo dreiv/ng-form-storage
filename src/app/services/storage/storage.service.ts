@@ -7,7 +7,7 @@ import { SessionStorageService } from './session-storage.service';
   useClass: SessionStorageService
 })
 export abstract class StorageService {
-  abstract getItem<T>(key: string): Promise<T>;
+  abstract getItem<T>(key: string): Promise<T> | void;
   abstract setItem<T>(key: string, value: T): Promise<void>;
   abstract removeItem(key: string): Promise<void>;
 }

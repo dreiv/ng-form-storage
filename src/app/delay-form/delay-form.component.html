@@ -1,0 +1,13 @@
+<p>persisted with session storage after 400ms delay</p>
+<form
+  [formGroup]="group"
+  name="contact-delay"
+  (ngSubmit)="submit()"
+  saveStrategy="change"
+>
+  <input type="text" placeholder="Name" formControlName="name">
+  <input type="email" placeholder="Email" formControlName="email">
+  <button type="submit">Submit</button>
+</form>
+
+{{ group.value | json }}

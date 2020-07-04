@@ -8,7 +8,7 @@ import { StorageService } from './storage.service';
 export class IndexedDBStorageService implements StorageService {
   private db = localforage.createInstance({
     driver: localforage.INDEXEDDB,
-    name: 'myApp',
+    name: 'form-storage',
     version: 1.0,
     storeName: 'forms',
   });

@@ -7,11 +7,12 @@ import { StorageService } from './storage.service';
 })
 export class SessionStorageService implements StorageService {
 
-  getItem<T>(key: string): Promise<T> {
+  getItem<T>(key: string): Promise<T> | void {
     const item = sessionStorage.getItem(key);
-    const value = item && JSON.parse(item);
 
-    return Promise.resolve(value);
+    if (item) {
+      return Promise.resolve(JSON.parse(item));
+    }
   }
 
   setItem<T>(key: string, value: T): Promise<void> {
