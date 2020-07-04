@@ -12,8 +12,7 @@ export class AppComponent {
     email: new FormControl()
   });
 
-  constructor() {
-  }
+  constructor() {}
 
   submit(): void {
     this.group.reset();

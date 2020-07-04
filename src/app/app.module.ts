@@ -14,11 +14,8 @@ import { DelayFormComponent } from './delay-form/delay-form.component';
     LargeFormComponent,
     DelayFormComponent
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule
-  ],
+  imports: [BrowserModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
